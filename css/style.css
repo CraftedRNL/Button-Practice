@@ -246,56 +246,54 @@
   }
 }
 
-
-.menu {
-    width: 150px;
-    height: 50px;
-    border-radius: 5px;
-    border: none;
-    transition: all 0.5s ease-in-out;
-    font-size: 20px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    background: #040f16;
-    color: #f5f5f5;
-  }
-  
-  .menu:hover {
-    box-shadow: 0 0 20px 0px #2e2e2e3a;
-  }
-  
-  .menu .icon {
-    position: absolute;
-    height: 40px;
-    width: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.5s;
-  }
-  
-  .menu .text {
-    transform: translateX(55px);
-  }
-  
-  .menu:hover .icon {
-    width: 175px;
-  }
-  
-  .menu:hover .text {
-    transition: all 0.5s;
-    opacity: 0;
-  }
-  
-  .menu:focus {
-    outline: none;
-  }
-  
-  .menu:active .icon {
-    transform: scale(0.85);
-  }
+.glow {
+  --glow-color: rgb(217, 176, 255);
+  --glow-spread-color: rgba(191, 123, 255, 0.781);
+  --enhanced-glow-color: rgb(231, 206, 255);
+  --btn-color: rgb(100, 61, 136);
+  border: .25em solid var(--glow-color);
+  padding: 1em 3em;
+  color: var(--glow-color);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--btn-color);
+  border-radius: 1em;
+  outline: none;
+  box-shadow: 0 0 1em .25em var(--glow-color),
+         0 0 4em 1em var(--glow-spread-color),
+         inset 0 0 .75em .25em var(--glow-color);
+  text-shadow: 0 0 .5em var(--glow-color);
+  position: relative;
+  transition: all 0.3s;
+ }
+ 
+ .glow::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 120%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--glow-spread-color);
+  filter: blur(2em);
+  opacity: .7;
+  transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+ }
+ 
+ .glow:hover {
+  color: var(--btn-color);
+  background-color: var(--glow-color);
+  box-shadow: 0 0 1em .25em var(--glow-color),
+         0 0 4em 2em var(--glow-spread-color),
+         inset 0 0 .75em .25em var(--glow-color);
+ }
+ 
+ .glow:active {
+  box-shadow: 0 0 0.6em .25em var(--glow-color),
+         0 0 2.5em 2em var(--glow-spread-color),
+         inset 0 0 .5em .25em var(--glow-color);
+ }
   .voltage-button {
     position: relative;
   }
@@ -445,49 +443,101 @@
       transform: translateY(3rem) scale(0.2);
     }
   }
-  .explore {
-    width: 110px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    background-color: rgb(161, 255, 20);
-    border-radius: 30px;
-    color: rgb(19, 19, 19);
-    font-weight: 600;
-    border: none;
-    position: relative;
-    cursor: pointer;
-    transition-duration: .2s;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
-    padding-left: 8px;
-    transition-duration: .5s;
-  }
-  
-  .svgIcon {
-    height: 25px;
-    transition-duration: 1.5s;
-  }
-  
-  .bell path {
-    fill: rgb(19, 19, 19);
-  }
-  
-  .explore:hover {
-    background-color: rgb(192, 255, 20);
-    transition-duration: .5s;
-  }
-  
-  .explore:active {
-    transform: scale(0.97);
-    transition-duration: .2s;
-  }
-  
-  .explore:hover .svgIcon {
-    transform: rotate(250deg);
-    transition-duration: 1.5s;
-  }
+  .glitch,
+  .glitch::after {
+ padding: 16px 20px;
+ font-size: 18px;
+ background: linear-gradient(45deg, transparent 5%, #ff013c 5%);
+ border: 0;
+ color: #fff;
+ letter-spacing: 3px;
+ line-height: 1;
+ box-shadow: 6px 0px 0px #00e6f6;
+ outline: transparent;
+ position: relative;
+}
+
+.glitch::after {
+ --slice-0: inset(50% 50% 50% 50%);
+ --slice-1: inset(80% -6px 0 0);
+ --slice-2: inset(50% -6px 30% 0);
+ --slice-3: inset(10% -6px 85% 0);
+ --slice-4: inset(40% -6px 43% 0);
+ --slice-5: inset(80% -6px 5% 0);
+ content: "HOVER ME";
+ display: block;
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background: linear-gradient(45deg, transparent 3%, #00e6f6 3%, #00e6f6 5%, #ff013c 5%);
+ text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #00e6f6;
+ clip-path: var(--slice-0);
+}
+
+.glitch:hover::after {
+ animation: 1s glitch;
+ animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+ 0% {
+  clip-path: var(--slice-1);
+  transform: translate(-20px, -10px);
+ }
+
+ 10% {
+  clip-path: var(--slice-3);
+  transform: translate(10px, 10px);
+ }
+
+ 20% {
+  clip-path: var(--slice-1);
+  transform: translate(-10px, 10px);
+ }
+
+ 30% {
+  clip-path: var(--slice-3);
+  transform: translate(0px, 5px);
+ }
+
+ 40% {
+  clip-path: var(--slice-2);
+  transform: translate(-5px, 0px);
+ }
+
+ 50% {
+  clip-path: var(--slice-3);
+  transform: translate(5px, 0px);
+ }
+
+ 60% {
+  clip-path: var(--slice-4);
+  transform: translate(5px, 10px);
+ }
+
+ 70% {
+  clip-path: var(--slice-2);
+  transform: translate(-10px, 10px);
+ }
+
+ 80% {
+  clip-path: var(--slice-5);
+  transform: translate(20px, -10px);
+ }
+
+ 90% {
+  clip-path: var(--slice-1);
+  transform: translate(-10px, 0px);
+ }
+
+ 100% {
+  clip-path: var(--slice-1);
+  transform: translate(0);
+ }
+}
+
   
   .boing {
     padding: 15px 30px;
@@ -527,86 +577,49 @@
       transform: scale(1, 1);
     }
   }
-  .light-button button.bt {
-    position: relative;
-    height: 200px;
-    display: flex;
-    align-items: flex-end;
-    outline: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .light-button button.bt .button-holder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100px;
-    width: 100px;
-    background-color: #0a0a0a;
-    border-radius: 5px;
-    color: #0f0f0f;
-    font-weight: 700;
-    transition: 300ms;
-    outline: #0f0f0f 2px solid;
-    outline-offset: 20;
-  }
-  
-  .light-button button.bt .button-holder svg {
-    height: 50px;
-    fill: #0f0f0f;
-    transition: 300ms;
-  }
-  
-  .light-button button.bt .light-holder {
-    position: absolute;
-    height: 200px;
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .light-button button.bt .light-holder .dot {
-    position: absolute;
-    top: 0;
-    width: 10px;
-    height: 10px;
-    background-color: #0a0a0a;
-    border-radius: 10px;
-    z-index: 2;
-  }
-  
-  .light-button button.bt .light-holder .light {
-    position: absolute;
-    top: 0;
-    width: 200px;
-    height: 200px;
-    clip-path: polygon(50% 0%, 25% 100%, 75% 100%);
-    background: transparent;
-  }
-  
-  .light-button button.bt:hover .button-holder svg {
-    fill: rgba(88, 101, 242, 1);
-  }
-  
-  .light-button button.bt:hover .button-holder {
-    color: rgba(88, 101, 242, 1);
-    outline: rgba(88, 101, 242, 1) 2px solid;
-    outline-offset: 2px;
-  }
-  
-  .light-button button.bt:hover .light-holder .light {
-    background: rgb(255, 255, 255);
-    background: linear-gradient(
-      180deg,
-      rgba(88, 101, 242, 1) 0%,
-      rgba(255, 255, 255, 0) 75%,
-      rgba(255, 255, 255, 0) 100%
-    );
-  }
+/* === removing default button style ===*/
+.uni {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* button styling */
+.uni {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.uni-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.uni:hover .uni-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
   .bat {
     border: none;
     position: relative;
@@ -832,64 +845,103 @@
       transform: translateX(-10px);
     }
   }
-  
-  .mogus {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 0 10px;
-    color: white;
-    text-shadow: 2px 2px rgb(116, 116, 116);
-    text-transform: uppercase;
-    cursor: pointer;
-    border: solid 2px black;
-    letter-spacing: 1px;
-    font-weight: 600;
-    font-size: 17px;
-    background-color: hsl(49deg 98% 60%);
-    border-radius: 50px;
+  .purple {
     position: relative;
+    padding: 1em 1.8em;
+    outline: none;
+    border: 1px solid #303030;
+    background: #212121;
+    color: #ae00ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 15px;
     overflow: hidden;
-    transition: all 0.5s ease;
-  }
-  
-  .mogus:active {
-    transform: scale(0.9);
-    transition: all 100ms ease;
-  }
-  
-  .mogus svg {
-    transition: all 0.5s ease;
-    z-index: 2;
-  }
-  
-  .sus {
-    transition: all 0.5s ease;
-    transition-delay: 300ms;
-  }
-  
-  .mogus:hover svg {
-    transform: scale(3) translate(50%);
-  }
-  
-  .now {
+    transition: 0.2s;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+   }
+   
+   .purple:hover {
+    box-shadow: 0 0 10px #ae00ff, 0 0 25px #001eff, 0 0 50px #ae00ff;
+    transition-delay: 0.6s;
+   }
+   
+   .purple span {
     position: absolute;
+   }
+   
+   .purple span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ae00ff);
+   }
+   
+   .purple:hover span:nth-child(1) {
+    left: 100%;
+    transition: 0.7s;
+   }
+   
+   .purple span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #001eff);
+   }
+   
+   .purple:hover span:nth-child(3) {
+    right: 100%;
+    transition: 0.7s;
+    transition-delay: 0.35s;
+   }
+   
+   .purple span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #ae00ff);
+   }
+   
+   .purple:hover span:nth-child(2) {
+    top: 100%;
+    transition: 0.7s;
+    transition-delay: 0.17s;
+   }
+   
+   .purple span:nth-child(4) {
+    bottom: -100%;
     left: 0;
-    transform: translateX(-100%);
-    transition: all 0.5s ease;
-    z-index: 2;
-  }
-  
-  .mogus:hover .now {
-    transform: translateX(10px);
-    transition-delay: 300ms;
-  }
-  
-  .mogus:hover .play {
-    transform: translateX(200%);
-    transition-delay: 300ms;
-  }
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #001eff);
+   }
+   
+   .purple:hover span:nth-child(4) {
+    bottom: 100%;
+    transition: 0.7s;
+    transition-delay: 0.52s;
+   }
+   
+   .purple:active {
+    background: #ae00af;
+    background: linear-gradient(to top right, #ae00af, #001eff);
+    color: #bfbfbf;
+    box-shadow: 0 0 8px #ae00ff, 0 0 8px #001eff, 0 0 8px #ae00ff;
+    transition: 0.1s;
+   }
+   
+   .purple:active span:nth-child(1) 
+   span:nth-child(2) 
+   span:nth-child(2) 
+   span:nth-child(2) {
+    transition: none;
+    transition-delay: none;
+   }
+   
   .btn-donate {
     --clr-font-main: hsla(0 0% 20% / 100);
     --btn-bg-1: hsla(194 100% 69% / 1);
