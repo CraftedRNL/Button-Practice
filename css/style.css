@@ -20,61 +20,61 @@
 }
 .water:focus {
   cursor: pointer;
-  background: url(/img/water.jpg);
+  background: url('../img/water.jpg');
   color: #57cfff;
   text-shadow: 2px 3px #000000;
 }
 .rock:focus {
   cursor: pointer;
-  background: url(/img/rock.jpg);
+  background: url('../img/rock.jpg');
   color: #707c81;
   text-shadow: 2px 3px #b6b6b6;
 }
 .grass:focus {
   cursor: pointer;
-  background: url(/img/grass.jpg);
+  background: url('../img/grass.jpg');
   color: rgb(149, 243, 9);
   text-shadow: 2px 3px #000000;
 }
 .fire:focus {
   cursor: pointer;
-  background: url(/img/fire.jpg);
+  background: url('../img/fire.jpg');
   color: firebrick;
   text-shadow: 2px 3px #afafaf;
 }
 .lightning:focus {
   cursor: pointer;
-  background: url(/img/lightning.jpg);
+  background: url('../img/lightning.jpg');
   color: goldenrod;
   text-shadow: 2px 3px #000000;
 }
 .ice:focus {
   cursor: pointer;
-  background: url(/img/ice.jpg);
+  background: url('../img/ice.jpg');
   color: rgb(79, 194, 194);
   text-shadow: 2px 3px #000000;
 }
 .light:focus {
   cursor: pointer;
-  background: url(/img/light.jpg);
+  background: url('../img/light.jpg');
   color: whitesmoke;
   text-shadow: 2px 3px #000000;
 }
 .dark:focus {
   cursor: pointer;
-  background: url(/img/dark.jpg);
+  background: url('../img/dark.jpg');
   color: rgb(70, 70, 70);
   text-shadow: 2px 3px #7e7e7e;
 }
 .pink:focus {
   cursor: pointer;
-  background: url(/img/fairy.jpg);
+  background: url('../img/fairy.jpg');
   color: azure;
   text-shadow: 2px 3px #000000;
 }
 .purp:focus {
   cursor: pointer;
-  background: url(/img/poison.jpg);
+  background: url('../img/poison.jpg');
   color: green;
   text-shadow: 2px 3px #000000;
 }
